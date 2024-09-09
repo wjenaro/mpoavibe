@@ -1,0 +1,8 @@
+/* src/components/SubscriptionUpgrade.css */
+
+/* Love-themed font (import your font here or use a Google Font) */
+@import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
+
+.font-love {
+  font-family: 'Sacramento', cursive;
+}

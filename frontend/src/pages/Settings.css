@@ -1,0 +1,17 @@
+/* src/components/Settings.css */
+
+/* Love-themed font (import your font here or use a Google Font) */
+@import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
+
+.font-love {
+  font-family: 'Sacramento', cursive;
+}
+
+/* Custom toggle switch styling */
+.toggle-switch {
+  accent-color: #34d399; /* Tailwind green-400 color */
+  width: 40px;
+  height: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+}
