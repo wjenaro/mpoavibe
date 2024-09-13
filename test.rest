@@ -1,0 +1,12 @@
+### Sign Up API Request
+POST http://localhost:4000/api/auth/sign-up
+Content-Type: application/json
+
+{
+  "fullName": "John Doe",
+  "email": "john.doe@example.com",
+  "password": "Password123!",
+  "interests": "hiking, reading, technology",
+  "profilePicture": "https://example.com/profile.jpg",
+  "additionalInfo": "Looking for love in the tech world"
+}

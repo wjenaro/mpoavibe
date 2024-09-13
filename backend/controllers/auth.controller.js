@@ -1,5 +1,7 @@
 const authService = require('../services/auth.service');
 
+
+
 // @desc    Register a new user
 // @route   POST /api/auth/sign-up
 exports.signUp = async (req, res) => {
@@ -10,6 +12,30 @@ exports.signUp = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+
+// @desc    Authenticate user and return JWT
+// @route   POST /api/auth/sign-in
+exports.signIn = async (req, res) => {
+  try {
+    const user = await authService.signIn(req.body.email, req.body.password);
+    res.status(200).json({ message: 'User authenticated successfully', user });
+  } catch (error) {
+    res.status(401).json({ message: error.message });
+  }
+};
+
+// @desc    Handle password recovery
+// @route   POST /api/auth/forgot-password
+exports.forgotPassword = async (req, res) => {
+  try {
+    const response = await authService.forgotPassword(req.body.email);
+    res.status(200).json(response);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 
 // @desc    Authenticate user and return JWT
 // @route   POST /api/auth/sign-in
