@@ -4,14 +4,65 @@ const authService = require('../services/auth.service');
 
 // @desc    Register a new user
 // @route   POST /api/auth/sign-up
-exports.signUp = async (req, res) => {
-  try {
-    const user = await authService.signUp(req.body);
-    res.status(201).json({ message: 'User registered successfully', user });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
+exports.phoneSignUp = async (req, res) => {
+
+  const { phoneNumber } = req.body;
+
+    // Send verification code via Twilio or SMS provider
+    const verificationCode = Math.floor(100000 + Math.random() * 900000);
+    
+    // Store verification code temporarily, send it via SMS
+    await sendSMS(phoneNumber, `Your verification code is ${verificationCode}`);
+
+    res.json({ message: 'Code sent to phone number' });
+
+};
+
+const sendSMS = async (phoneNumber, message) => {
+  // Use Twilio or another SMS provider here
+  console.log(`Sending SMS to ${phoneNumber}: ${message}`);
+};
+
+///
+exports.phoneVerify= async (req, res) => {
+  const { phoneNumber, code, email } = req.body;
+
+  // Verify code (should be stored temporarily on backend)
+  if (isValidCode(phoneNumber, code)) {
+      // Prompt user for name, gender, and dob
+      res.json({ message: 'Code verified, please provide name, gender, and DOB' });
+  } else {
+      res.status(400).json({ error: 'Invalid code' });
   }
 };
+
+
+const isValidCode = (phoneNumber, code) => {
+  // Implement code validation logic, e.g., check a database or in-memory store
+  return true; // For demonstration, assume valid
+};
+
+
+exports.signUpDetails= async (req, res) => {
+  const { name, gender, dob, email, phoneNumber } = req.body;
+
+  // Store user info in DB
+  await saveUserToDB({ name, gender, dob, email, phoneNumber });
+
+  res.json({ message: 'Signup successful' });
+};
+
+
+const saveUserToDB = async (user) => {
+  // Logic to store the user in your database
+  console.log('Saving user to DB:', user);
+};
+
+
+
+
+
+
 
 
 // @desc    Authenticate user and return JWT

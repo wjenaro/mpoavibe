@@ -1,11 +1,15 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const db = require('./config/db.config'); // Adjust import
+const authRouter= require('./routes/auth.routes')
 
 // Load environment variables from .env file
 dotenv.config();
 
 const app = express();
+app.use(express.json());
+
+app.use('/api', authRouter)
 
 // Start the server and listen on the defined port
 const PORT = process.env.PORT || 5000;

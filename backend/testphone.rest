@@ -1,0 +1,16 @@
+# POST request to sign up with phone number
+POST http://localhost:5000/api/phone/sign-up
+Content-Type: application/json
+
+{
+  "phoneNumber": "+1234567890"
+}
+
+# Verify phone number and submit email
+POST http://localhost:5000/api/auth/phone/verify
+Content-Type: application/json
+{
+  "phoneNumber": "+1234567890",
+  "code": "123456",
+  "email": "user@example.com"
+}

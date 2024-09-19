@@ -7,7 +7,11 @@ const authController = require('../controllers/auth.controller');
 // @route   POST /api/auth/sign-up
 // @desc    Register a new user
 // @access  Public
-router.post('/sign-up', authController.signUp);
+router.post('/phone/sign-up', authController.phoneSignUp);
+//
+router.post('/auth/phone/verify', authController.phoneVerify);
+
+router.post('/auth/details', authController.signUpDetails);
 
 // @route   POST /api/auth/sign-in
 // @desc    Authenticate user and return JWT
