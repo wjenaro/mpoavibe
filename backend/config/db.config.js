@@ -13,6 +13,7 @@ const sequelize = new Sequelize(
     port: process.env.DB_PORT,
   }
 );
+//test database connectiion =------------
 
 // Define a database object to export
 const db = {};
