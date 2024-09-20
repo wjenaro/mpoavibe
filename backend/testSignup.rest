@@ -1,0 +1,11 @@
+POST http://localhost:5000/api/auth/details
+Content-Type: application/json
+
+{
+  "name": "User Name",
+  "gender": "Male",
+  "password": "jakaosai",
+  "dob": "1990-01-01",
+  "email": "user@example.com",
+  "phoneNumber": "+1234567890"
+}

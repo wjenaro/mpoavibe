@@ -1,48 +1,57 @@
-
-
-// module.exports = User;
 const { DataTypes } = require('sequelize');
-const sequelize = require('../config/db.config').sequelize;
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
+const db = require('../config/db.config'); // Import db, not sequelize directly
 
-const User = sequelize.define('User', {
-  fullName: {
+const User = db.sequelize.define('User', { // Use db.sequelize
+  name: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+  },
+  gender: {
+    type: DataTypes.ENUM('Male', 'Female', 'Other'),
+    allowNull: false,
+  },
+  dob: {
+    type: DataTypes.DATEONLY,
+    allowNull: false,
   },
   email: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true
+    unique: true,
+    validate: {
+      isEmail: true,
+    },
   },
   password: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
   },
-  interests: {
-    type: DataTypes.STRING
+  phoneNumber: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    unique: true,
   },
-  profilePicture: {
-    type: DataTypes.STRING
+}, {
+  hooks: {
+    beforeCreate: async (user) => {
+      if (user.password) {
+        const salt = await bcrypt.genSalt(10);
+        user.password = await bcrypt.hash(user.password, salt);
+      }
+    },
+    beforeUpdate: async (user) => {
+      if (user.password) {
+        const salt = await bcrypt.genSalt(10);
+        user.password = await bcrypt.hash(user.password, salt);
+      }
+    },
   },
-  additionalInfo: {
-    type: DataTypes.STRING
-  },
-  date: {
-    type: DataTypes.DATE,
-    defaultValue: DataTypes.NOW
-  }
 });
 
-// Hash password before saving
-User.beforeCreate(async (user) => {
-  const salt = await bcrypt.genSalt(10);
-  user.password = await bcrypt.hash(user.password, salt);
-});
-
-// Method to compare passwords
-User.prototype.comparePassword = function (password) {
-  return bcrypt.compare(password, this.password);
+// Method to compare hashed password during login
+User.prototype.comparePassword = async function (enteredPassword) {
+  return bcrypt.compare(enteredPassword, this.password);
 };
 
 module.exports = User;

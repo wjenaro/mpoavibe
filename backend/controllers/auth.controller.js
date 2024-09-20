@@ -44,19 +44,14 @@ const isValidCode = (phoneNumber, code) => {
 
 
 exports.signUpDetails= async (req, res) => {
-  const { name, gender, dob, email, phoneNumber } = req.body;
+  const { name, gender, dob, password, email, phoneNumber } = req.body;
 
   // Store user info in DB
-  await saveUserToDB({ name, gender, dob, email, phoneNumber });
+  await authService.signUp({ name, gender, dob, password, email, phoneNumber });
 
   res.json({ message: 'Signup successful' });
 };
 
-
-const saveUserToDB = async (user) => {
-  // Logic to store the user in your database
-  console.log('Saving user to DB:', user);
-};
 
 
 
