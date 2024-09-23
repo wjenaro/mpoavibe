@@ -15,6 +15,9 @@ import SubscriptionUpgrade from "./pages/SubscriptionUpgrade";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import Settings from "./pages/Settings";
 import ErrorScreen from "./pages/ErrorScreen";
+import SignUpOptions from "./pages/SignUpOptions";
+import PhoneVerification from "./pages/PhoneVerification";
+import CompleteSignUp from "./pages/CompleteSignUp";
 
 
 
@@ -32,6 +35,9 @@ const App = () => {
         <Route path="/chat/:matchName" element={<Chat/>}/>
         <Route path="/chat-list" element={<ChatList/>}/>
         <Route path="/user-profile" element={<UserProfile/>}/>
+        <Route path="/signup-options" element={<SignUpOptions/>}/>
+        <Route path="/phone-verification" element={<PhoneVerification/>}/>
+        <Route path="/complete-signup" element={<CompleteSignUp/>}/>
         <Route path="/subscription-upgrade" element={<SubscriptionUpgrade/>}/>
         <Route path="/payment-success" element={<PaymentSuccess/>}/>
         <Route path="/settings" element={<Settings/>}/>

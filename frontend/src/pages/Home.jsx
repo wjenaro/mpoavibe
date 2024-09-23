@@ -1,4 +1,3 @@
-
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./HomeScreen.css"; // Custom CSS for font
@@ -12,7 +11,7 @@ const HomeScreen = () => {
   };
 
   const handleSignUp = () => {
-    navigate("/signup");
+    navigate("/signup-options"); // Navigate to phone or google sign-up options
   };
 
   // Handle Google Authentication
@@ -49,17 +48,8 @@ const HomeScreen = () => {
           >
             Sign Up
           </button>
-          <button
-            onClick={handleGoogleAuth}
-            className="flex items-center justify-center bg-red-600 text-white font-semibold py-2 px-6 rounded-lg hover:bg-red-700 transition-all"
-          >
-            <img
-              src="/images/google-icon.svg" // Google icon (add this to your project)
-              alt="Google"
-              className="w-5 h-5 mr-2"
-            />
-            Sign in with Google
-          </button>
+     
+    
         </div>
       </div>
     </div>
