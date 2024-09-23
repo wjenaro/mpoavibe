@@ -1,5 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv');
+const cors = require('cors');
 const db = require('./config/db.config'); // Adjust import
 const authRouter= require('./routes/auth.routes')
 
@@ -8,6 +9,9 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
+
+// Use CORS middleware
+app.use(cors());
 
 app.use('/api', authRouter)
 

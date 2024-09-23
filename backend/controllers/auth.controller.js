@@ -1,20 +1,61 @@
 const authService = require('../services/auth.service');
+const twilio = require("twilio");
+
+// Load environment variables
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = twilio(accountSid, authToken);
 
 
+const verificationCodes = {};
 
 // @desc    Register a new user
 // @route   POST /api/auth/sign-up
 exports.phoneSignUp = async (req, res) => {
 
-  const { phoneNumber } = req.body;
+  // const { phoneNumber } = req.body;
 
-    // Send verification code via Twilio or SMS provider
-    const verificationCode = Math.floor(100000 + Math.random() * 900000);
+  //   // Send verification code via Twilio or SMS provider
+  //   const verificationCode = Math.floor(100000 + Math.random() * 900000);
     
-    // Store verification code temporarily, send it via SMS
-    await sendSMS(phoneNumber, `Your verification code is ${verificationCode}`);
+  //   // Store verification code temporarily, send it via SMS
+  //   await sendSMS(phoneNumber, `Your verification code is ${verificationCode}`);
 
-    res.json({ message: 'Code sent to phone number' });
+  //   res.json({ message: 'Code sent to phone number' });
+
+  const { phone } = req.body;
+
+  // Validate phone input
+  if (!phone) {
+    return res.status(400).send("Phone number is required.");
+  }
+
+  // Validate Twilio Account SID
+  if (!accountSid.startsWith("AC")) {
+    return res.status(500).send("Invalid Twilio Account SID.");
+  }
+
+  // Generate a random 6-digit verification code
+  const verificationCode = Math.floor(100000 + Math.random() * 900000).toString();
+
+  // Send the verification code via SMS using Twilio
+  client.messages
+    .create({
+      body: `Your verification code is ${verificationCode}`,
+      from: process.env.TWILIO_PHONE_NUMBER, // Ensure this is a verified Twilio number
+      to: phone,
+    })
+    .then(() => {
+      // Temporarily store the code
+      verificationCodes[phone] = verificationCode;
+
+      
+      res.status(200).send("Verification code sent successfully.");
+    })
+    .catch((error) => {
+      console.error("Error sending verification code:", error);
+      res.status(500).send("Failed to send verification code.");
+    });
 
 };
 
