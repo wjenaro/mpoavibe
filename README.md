@@ -1,4 +1,5 @@
-LoveConnect - Location-Based Matching Dating App
+**LoveConnect - Location-Based Matching Dating App**
+<hr/>
 LoveConnect is a mobile-first, web-based dating application that allows individuals to connect based on interests and location. The app integrates authentication (Google and phone verification), profile setup, and subscription-based chat functionality.
 
 Table of Contents
