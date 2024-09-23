@@ -1,6 +1,35 @@
-**LoveConnect - Location-Based Matching Dating App**
-<hr/>
-LoveConnect is a mobile-first, web-based dating application that allows individuals to connect based on interests and location. The app integrates authentication (Google and phone verification), profile setup, and subscription-based chat functionality.
+# LoveConnect
+
+**LoveConnect** is a mobile-first, web-based dating application that allows individuals to connect based on shared interests and geographic location.
+
+## Features
+
+- **Location-Based Matching**: Connect with individuals nearby based on interests.
+- **Authentication**: Secure login options including Google and phone verification.
+- **Profile Setup**: Easy and intuitive user profile creation.
+- **Subscription-Based Chat**: Engage in conversations with matches through a premium chat feature.
+
+## Technologies Used
+
+- **Frontend**: HTML, CSS, JavaScript
+- **Backend**: Node.js, Express
+- **Database**: MongoDB
+- **Authentication**: OAuth for Google, phone verification via SMS
+- **Deployment**: Heroku / AWS (or specify your preferred platform)
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js and npm installed
+- MongoDB database
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/loveconnect.git
+
 
 Table of Contents
 Project Overview
